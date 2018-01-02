@@ -165,6 +165,7 @@ func (l *LeaseManager) RenewLease(lease *Lease) (err error) {
 	clease.Counter++
 	if err = l.condUpdate(clease, *lease); err == nil {
 		lease.Counter = clease.Counter
+		lease.lastRenewal = time.Now()
 	}
 	return
 }
